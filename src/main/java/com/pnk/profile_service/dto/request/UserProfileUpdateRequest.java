@@ -1,10 +1,9 @@
 package com.pnk.profile_service.dto.request;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDate;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Data
 @NoArgsConstructor
@@ -20,5 +19,4 @@ public class UserProfileUpdateRequest {
     LocalDate dob;
 
     String address;
-
 }

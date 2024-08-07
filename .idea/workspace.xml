@@ -6,9 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="Initial commit">
       <change afterPath="$PROJECT_DIR$/src/main/resources/secrets.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/pnk/profile_service/service/UserProfileServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/ProfileServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/ProfileServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileCreationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileUpdateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/response/UserProfileResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/response/UserProfileResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/entity/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/entity/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/mapper/UserProfileMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/mapper/UserProfileMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/repository/UserProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/repository/UserProfileRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/pnk/profile_service/ProfileServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pnk/profile_service/ProfileServiceApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +33,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -49,10 +63,20 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.ProfileServiceApplication.executor": "Debug",
+    "JUnit.All in profile-service (1).executor": "Coverage",
+    "JUnit.All in profile-service.executor": "Coverage",
+    "JUnit.UserProfileServiceImplTest.testGetUserProfileById.executor": "Coverage",
+    "JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException.executor": "Coverage",
+    "JUnit.UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success.executor": "Coverage",
+    "Maven.profile-service [clean,test...].executor": "Run",
     "Maven.profile-service [clean].executor": "Run",
+    "Maven.profile-service [com.diffplug.spotless:spotless-maven-plugin:2.43.0:apply].executor": "Run",
+    "Maven.profile-service [spotless:apply].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "init__dev",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -63,27 +87,88 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\SpringBootProjects\HospitalMgmtService\profile-service\src\main\resources" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.pnk.profile_service.service" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.pnk.profile_service.dto.request" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="ProfileServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.pnk.profile_service.ProfileServiceApplication" />
+  <component name="RunManager" selected="JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException">
+    <configuration name="All in profile-service (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="profile-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in profile-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="profile-service" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserProfileServiceImplTest.testGetUserProfileById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="profile-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.pnk.profile_service.*" />
+          <option name="PATTERN" value="com.pnk.profile_service.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.pnk.profile_service.service" />
+      <option name="MAIN_CLASS_NAME" value="com.pnk.profile_service.service.UserProfileServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetUserProfileById" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="profile-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pnk.profile_service.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pnk.profile_service.service" />
+      <option name="MAIN_CLASS_NAME" value="com.pnk.profile_service.service.UserProfileServiceImplTest" />
+      <option name="METHOD_NAME" value="testGetUserProfileById_invalid_throws_RuntimeException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="profile-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pnk.profile_service.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pnk.profile_service.service" />
+      <option name="MAIN_CLASS_NAME" value="com.pnk.profile_service.service.UserProfileServiceImplTest" />
+      <option name="METHOD_NAME" value="testRegisterUserProfile_validRequest_success" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ProfileServiceApplication" />
+        <item itemvalue="JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException" />
+        <item itemvalue="JUnit.All in profile-service (1)" />
+        <item itemvalue="JUnit.All in profile-service" />
+        <item itemvalue="JUnit.UserProfileServiceImplTest.testGetUserProfileById" />
+        <item itemvalue="JUnit.UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success" />
       </list>
     </recent_temporary>
   </component>
@@ -112,11 +197,46 @@
       <option name="project" value="LOCAL" />
       <updated>1722998052492</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1722999659397</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722999659397</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1722999747950</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722999747950</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1723000147248</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723000147248</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge pull request #1 from HospitalMgmtService/init_dev&#10;&#10;Initial commit" />
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/profile_service$All_in_profile_service.ic" NAME="All in profile-service Coverage Results" MODIFIED="1723001946903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/profile_service$All_in_profile_service__1_.ic" NAME="All in profile-service (1) Coverage Results" MODIFIED="1723002864585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/profile_service$UserProfileServiceImplTest_testRegisterUserProfile_validRequest_success.ic" NAME="UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success Coverage Results" MODIFIED="1723001693383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.pnk.profile_service.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/profile_service$UserProfileServiceImplTest_testGetUserProfileById.ic" NAME="UserProfileServiceImplTest.testGetUserProfileById Coverage Results" MODIFIED="1723001921550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>com.pnk.profile_service.service.*</FILTER>
+    </SUITE>
   </component>
 </project>
