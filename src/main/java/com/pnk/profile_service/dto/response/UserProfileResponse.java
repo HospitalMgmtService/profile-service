@@ -1,9 +1,10 @@
 package com.pnk.profile_service.dto.response;
 
-import java.time.LocalDate;
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
+
 
 @Data
 @NoArgsConstructor
