@@ -1,7 +1,7 @@
 server:
   port: 9191
   servlet:
-    context-path: /v1/profile
+    context-path: /profile
 
 spring:
   application:
