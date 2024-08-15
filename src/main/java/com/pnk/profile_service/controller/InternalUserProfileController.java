@@ -1,32 +1,32 @@
 package com.pnk.profile_service.controller;
 
+import com.pnk.profile_service.dto.request.UserProfileCreationRequest;
 import com.pnk.profile_service.dto.response.UserProfileResponse;
 import com.pnk.profile_service.service.UserProfileServiceImpl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/internal/users")
 @RequiredArgsConstructor // injected by Constructor, no longer need of @Autowire
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Slf4j
-public class UserProfileController {
+public class InternalUserProfileController {
 
     UserProfileServiceImpl userProfileService;
 
 
-    @GetMapping("/{profileId}")
-    UserProfileResponse getUserProfile(@PathVariable String profileId) {
-        log.info(">> getUserProfile::profileId {}", profileId);
-
-        return userProfileService.getUserProfileById(profileId);
+    @PostMapping
+    UserProfileResponse createUserProfile(@RequestBody UserProfileCreationRequest userProfileCreationRequest) {
+        log.info(">> createUserProfile::userProfileCreationRequest {}", userProfileCreationRequest);
+        return userProfileService.registerUserProfile(userProfileCreationRequest);
     }
 
 }

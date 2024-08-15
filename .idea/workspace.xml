@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="Initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/InternalUserProfileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileCreationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/UserProfileCreationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "init__dev",
+    "git-widget-placeholder": "add-api-gateway",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/resources",
@@ -85,6 +86,7 @@
       <recent name="com.pnk.profile_service.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pnk.profile_service.controller" />
       <recent name="com.pnk.profile_service.dto.request" />
     </key>
   </component>
