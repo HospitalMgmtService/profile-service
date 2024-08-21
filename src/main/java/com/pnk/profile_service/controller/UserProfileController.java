@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/users")
@@ -27,6 +29,14 @@ public class UserProfileController {
         log.info(">> getUserProfile::profileId {}", profileId);
 
         return userProfileService.getUserProfileById(profileId);
+    }
+
+
+    @GetMapping()
+    List<UserProfileResponse> getAllProfiles() {
+        log.info(">> getAllProfiles");
+
+        return userProfileService.getAllUserProfiles();
     }
 
 }
