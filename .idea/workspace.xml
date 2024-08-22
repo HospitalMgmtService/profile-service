@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="add api gateway">
+    <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="add security to gateway">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/configuration/CustomJwtDecoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/configuration/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/configuration/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/dto/request/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/exception/AppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/controller/UserProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="add-security-to-gateway" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,10 +71,10 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "add-security-to-gateway",
+    "git-widget-placeholder": "add-authorization",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/resources",
+    "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/java/com/pnk/profile_service/configuration",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -77,6 +83,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\SpringBootProjects\HospitalMgmtService\profile-service\src\main\java\com\pnk\profile_service\configuration" />
       <recent name="C:\SpringBootProjects\HospitalMgmtService\profile-service\src\main\resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -86,8 +93,9 @@
       <recent name="com.pnk.profile_service.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.pnk.profile_service.controller" />
+      <recent name="com.pnk.profile_service.exception" />
       <recent name="com.pnk.profile_service.dto.request" />
+      <recent name="com.pnk.profile_service.controller" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ProfileServiceApplication">
@@ -211,13 +219,24 @@
       <option name="project" value="LOCAL" />
       <updated>1723000147248</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add security to gateway">
+      <option name="closed" value="true" />
+      <created>1724276682456</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1724276682456</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge pull request #1 from HospitalMgmtService/init_dev&#10;&#10;Initial commit" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Merge pull request #9 from HospitalMgmtService/add-api-gateway&#10;&#10;add api gateway" />
+    <MESSAGE value="add api gateway" />
+    <MESSAGE value="add security to gateway" />
+    <option name="LAST_COMMIT_MESSAGE" value="add security to gateway" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/profile_service$UserProfileServiceImplTest_testGetUserProfileById_invalid_throws_RuntimeException.ic" NAME="UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException Coverage Results" MODIFIED="1723003131842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
