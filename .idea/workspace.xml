@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="add security to gateway">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/configuration/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,34 +44,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ProfileServiceApplication.executor": "Debug",
-    "JUnit.All in profile-service (1).executor": "Coverage",
-    "JUnit.All in profile-service (2).executor": "Coverage",
-    "JUnit.All in profile-service.executor": "Coverage",
-    "JUnit.UserProfileServiceImplTest.testGetUserProfileById.executor": "Coverage",
-    "JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException.executor": "Coverage",
-    "JUnit.UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success.executor": "Coverage",
-    "Maven.profile-service [clean,test...].executor": "Run",
-    "Maven.profile-service [clean].executor": "Run",
-    "Maven.profile-service [com.diffplug.spotless:spotless-maven-plugin:2.43.0:apply].executor": "Run",
-    "Maven.profile-service [spotless:apply].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "security-among-microservices2",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/java/com/pnk/profile_service/configuration",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ProfileServiceApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.All in profile-service (1).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in profile-service (2).executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.All in profile-service.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserProfileServiceImplTest.testGetUserProfileById.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success.executor&quot;: &quot;Coverage&quot;,
+    &quot;Maven.profile-service [clean,test...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.profile-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.profile-service [com.diffplug.spotless:spotless-maven-plugin:2.43.0:apply].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.profile-service [spotless:apply].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;send-email-with-kafka&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/java/com/pnk/profile_service/configuration&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\SpringBootProjects\HospitalMgmtService\profile-service\src\main\java\com\pnk\profile_service\configuration" />
