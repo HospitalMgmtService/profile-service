@@ -4,6 +4,8 @@ server:
     context-path: /profile
 
 spring:
+  config:
+    import: "secrets.yml"
   application:
     name: profile-service
   neo4j:
@@ -11,5 +13,3 @@ spring:
     authentication:
       username: neo4j
       password: ${spring.neo4j.authentication.password}
-
-spring.config.import: secrets.yml
