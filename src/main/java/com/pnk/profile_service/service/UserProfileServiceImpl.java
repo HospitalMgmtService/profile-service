@@ -31,6 +31,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         userProfile = userProfileRepository.save(userProfile);
 
+        log.info(">> getUserProfileById::userProfile: {}", userProfile);
+
         return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
@@ -38,6 +40,8 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     @PreAuthorize("hasRole('ROLE_ADMIN')")       // authorize before the method called
     public List<UserProfileResponse> getAllUserProfiles() {
+        log.info(">> getAllUserProfiles");
+
         var profiles = userProfileRepository.findAll();
 
         return profiles.stream().map(userProfileMapper::toUserProfileResponse).toList();
@@ -48,6 +52,8 @@ public class UserProfileServiceImpl implements UserProfileService {
     public UserProfileResponse getUserProfileById(String id) {
         UserProfile userProfile = userProfileRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User profile not found"));
+
+        log.info(">> getUserProfileById::id {} >> userProfile: {}", id, userProfile);
 
         return userProfileMapper.toUserProfileResponse(userProfile);
     }
