@@ -26,6 +26,7 @@ public class InternalUserProfileController {
     @PostMapping
     UserProfileResponse createUserProfile(@RequestBody UserProfileCreationRequest userProfileCreationRequest) {
         log.info(">> createUserProfile::userProfileCreationRequest {}", userProfileCreationRequest);
+
         return userProfileService.registerUserProfile(userProfileCreationRequest);
     }
 
