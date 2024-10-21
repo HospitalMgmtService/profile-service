@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Checkout the git repository without credentials
                 echo 'Stage of Checkout Git Repo'
-                git url: 'https://github.com/HospitalMgmtService/profile-service.git', branch: 'master'
+                git url: 'https://github.com/HospitalMgmtService/profile-service.git', branch: 'main'
             }
         }
 
