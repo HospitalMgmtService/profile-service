@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Stage of Checkout Git Repo'
                 // Explicitly checking out the Jenkinsfile from a subdirectory
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
 
