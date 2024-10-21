@@ -13,6 +13,15 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
+        
+        stage('Inject Secrets') {
+            steps {
+                // Copy secrets.yml from Jenkins credentials to the working directory
+                withCredentials([file(credentialsId: 'SECRETS_YML', variable: 'SECRET_FILE')]) {
+                    bat 'copy %SECRET_FILE% src/main/resources/secrets.yml'
+                }
+            }
+        }
 
         stage('Build') {
             steps {
