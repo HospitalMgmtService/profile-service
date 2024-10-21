@@ -17,8 +17,9 @@ pipeline {
         stage('Inject Secrets') {
             steps {
                 // Copy secrets.yml from Jenkins credentials to the working directory
-                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS_YML', variable: 'PROFILE_SERVICE_SECRETS_YML')]) {
-                    bat 'copy PROFILE_SERVICE_SECRETS_YML src/main/resources/secrets.yml'
+                withCredentials([file(credentialsId: 'PROFFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                 }
             }
         }
