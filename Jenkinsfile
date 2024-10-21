@@ -1,16 +1,16 @@
 pipeline {
     agent any
 
-    // tools {
-    //     maven 'maven3.8.8'
-    // }
+    tools {
+        maven 'maven3.8.8'
+    }
 
     stages {
         stage('Checkout Git Repo') {
             steps {
-                // Checkout the git repository without credentials
                 echo 'Stage of Checkout Git Repo'
-                git url: 'https://github.com/HospitalMgmtService/profile-service.git', branch: 'main'
+                // Explicitly checking out the Jenkinsfile from a subdirectory
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service.git']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
 
