@@ -36,3 +36,4 @@ build/
 
 secrets.yml
 secrets.properties
+Jenkinsfile
