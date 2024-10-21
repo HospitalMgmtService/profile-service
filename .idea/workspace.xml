@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cfc04c8-ab81-4dbf-afcc-0b6e682414f0" name="Changes" comment="add security to gateway">
+      <change afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pnk/profile_service/service/UserProfileServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/banner.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/banner.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,11 +25,23 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="pagination" />
+        <entry key="$PROJECT_DIR$" value="release/2024_M10" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;vhphong&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/HospitalMgmtService/profile-service.git&quot;,
+    &quot;accountId&quot;: &quot;addcaf2d-016f-4025-8c0b-7a86475d6618&quot;
+  }
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -49,12 +60,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.ProfileServiceApplication.executor": "Debug",
+    "JAR Application.PROFILE_JAR.executor": "Debug",
     "JUnit.All in profile-service (1).executor": "Coverage",
     "JUnit.All in profile-service (2).executor": "Coverage",
     "JUnit.All in profile-service.executor": "Coverage",
     "JUnit.UserProfileServiceImplTest.testGetUserProfileById.executor": "Coverage",
     "JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException.executor": "Coverage",
     "JUnit.UserProfileServiceImplTest.testRegisterUserProfile_validRequest_success.executor": "Coverage",
+    "Maven.profile-service [clean,package].executor": "Run",
     "Maven.profile-service [clean,test...].executor": "Run",
     "Maven.profile-service [clean].executor": "Run",
     "Maven.profile-service [com.diffplug.spotless:spotless-maven-plugin:2.43.0:apply].executor": "Run",
@@ -64,10 +77,10 @@
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "update-security",
+    "git-widget-placeholder": "add-Jenkinsfile",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/src/main/java/com/pnk/profile_service/configuration",
+    "last_opened_file_path": "C:/SpringBootProjects/HospitalMgmtService/profile-service/target/profile-service-0.0.9.jar",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -91,7 +104,12 @@
       <recent name="com.pnk.profile_service.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProfileServiceApplication">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean package" />
+    </option>
+  </component>
+  <component name="RunManager" selected="JAR Application.PROFILE_JAR">
     <configuration name="ProfileServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.pnk.profile_service.ProfileServiceApplication" />
       <module name="profile-service" />
@@ -153,6 +171,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PROFILE_JAR" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/profile-service-0.0.9.jar" />
+      <option name="WORKING_DIRECTORY" value="C:\SpringBootProjects\HospitalMgmtService\profile-service" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.ProfileServiceApplication" />
+      <item itemvalue="JAR Application.PROFILE_JAR" />
+      <item itemvalue="JUnit.All in profile-service" />
+      <item itemvalue="JUnit.All in profile-service (1)" />
+      <item itemvalue="JUnit.UserProfileServiceImplTest.testGetUserProfileById" />
+      <item itemvalue="JUnit.UserProfileServiceImplTest.testGetUserProfileById_invalid_throws_RuntimeException" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ProfileServiceApplication" />
