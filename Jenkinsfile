@@ -18,7 +18,7 @@ pipeline {
             steps {
                 // Copy secrets.yml from Jenkins credentials to the working directory
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS_YML', variable: 'SECRET_FILE')]) {
-                    bat 'copy %SECRET_FILE% src/main/resources/secrets.yml'
+                    bat 'copy SECRET_FILE src/main/resources/secrets.yml'
                 }
             }
         }
