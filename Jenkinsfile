@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven3.8.8'
+    }
+
     stages {
         stage('Checkout Git Repo') {
             steps {
