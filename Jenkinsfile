@@ -23,7 +23,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('DEV') {
             steps {
                 echo 'Stage of DEV...replace PROFILE_SERVICE_SECRETS'
@@ -35,7 +35,7 @@ pipeline {
                 bat 'mvn clean compile'
             }
         }
-        
+
         stage('TEST') {
             steps {
                 echo 'Stage of Test: Running tests...'
@@ -59,7 +59,7 @@ pipeline {
                 bat 'mvn clean package'
             }
         }
-        
+
         stage('UAT') {
             steps {
                 echo 'Stage of UAT...replace PROFILE_SERVICE_SECRETS'
