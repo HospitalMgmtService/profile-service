@@ -10,6 +10,7 @@ pipeline {
             steps {
                 echo 'Stage of Checkout Git Repo'
                 checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
+                bat 'dir'
             }
         }
         
@@ -18,6 +19,7 @@ pipeline {
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                    bat 'dir'
                 }
             }
         }
@@ -41,6 +43,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Stage of Deploy: Deploying the application...'
+                bat 'dir'
             }
         }
     }
