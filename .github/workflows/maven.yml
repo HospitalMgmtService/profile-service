@@ -37,8 +37,78 @@ jobs:
         echo 'Injecting secrets.yml'
         echo "${{ secrets.PROFILE_SERVICE_SECRETS }}" > src/main/resources/secrets.yml
 
-    - name: Build with Maven
-      run: mvn -B clean package --file pom.xml
+  # Job for UAT environment
+  uat:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Inject Secrets
+        run: |
+          echo 'Injecting secrets for UAT'
+          echo "${{ secrets.UAT_SERVICE_SECRETS }}" > src/main/resources/secrets.yml
+      - name: Build and Test for UAT
+        run: mvn -B clean package --file pom.xml -Puat
 
-    - name: Test with Maven
-      run: mvn test --file pom.xml
+  # Job for Dev environment
+  dev:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Inject Secrets
+        run: |
+          echo 'Injecting secrets for Dev'
+          echo "${{ secrets.DEV_SERVICE_SECRETS }}" > src/main/resources/secrets.yml
+      - name: Build and Test for Dev
+        run: mvn -B clean package --file pom.xml -Pdev
+
+  # Job for Test environment
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Inject Secrets
+        run: |
+          echo 'Injecting secrets for Test'
+          echo "${{ secrets.TEST_SERVICE_SECRETS }}" > src/main/resources/secrets.yml
+      - name: Build and Test for Test
+        run: mvn -B clean package --file pom.xml -Ptest
+
+  # Job for production (optional)
+  production:
+    runs-on: ubuntu-latest
+    needs: [uat, dev, test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Inject Secrets
+        run: |
+          echo 'Injecting secrets for Production'
+          echo "${{ secrets.PROD_SERVICE_SECRETS }}" > src/main/resources/secrets.yml
+      - name: Build and Deploy for Production
+        run: mvn -B clean package --file pom.xml -Pprod
