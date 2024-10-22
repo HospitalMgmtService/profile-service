@@ -26,7 +26,7 @@ pipeline {
                     // Check if the branch is release/2024_M10 and adjust the source path accordingly
                     if (params.BRANCH_NAME == 'release/2024_M10') {
                         echo 'Injecting secrets.yml for release/2024_M10...'
-                        bat "copy src\\release\\2024_M10\\resources\\secrets.yml ${secretsFilePath}"
+                        bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                     } else {
                         echo 'Injecting secrets.yml for main...'
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
