@@ -5,41 +5,34 @@ pipeline {
         maven 'maven3.8.8'
     }
 
-    stages {
-        stage('Checkout Git Repos') {
-            parallel {
-                stage('Checkout Main Branch') {
-                    steps {
-                        echo 'Checking out the main branch...'
-                        checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service-main']]])
-                    }
-                }
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build (e.g., main or release/2024_M10)')
+    }
 
-                stage('Checkout Release Branch (release/2024_M10)') {
-                    steps {
+    stages {
+        stage('Checkout Git Repo') {
+            steps {
+                script {
+                    if (params.BRANCH_NAME == 'main') {
+                        echo 'Checking out the main branch...'
+                        checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
+                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
                         echo 'Checking out the release/2024_M10 branch...'
-                        checkout([$class: 'GitSCM', branches: [[name: 'release/2024_M10']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service-release']]])
+                        checkout([$class: 'GitSCM', branches: [[name: 'release/2024_M10']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
+                    } else {
+                        error("Unsupported branch: ${params.BRANCH_NAME}")
                     }
                 }
             }
         }
 
         stage('Inject Secrets') {
-            parallel {
-                stage('Inject Secrets for Main Branch') {
-                    steps {
+            steps {
+                script {
+                    if (params.BRANCH_NAME == 'main' || params.BRANCH_NAME == 'release/2024_M10') {
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            echo 'Injecting secrets.yml for main branch'
-                            bat 'copy %SECRET_FILE% profile-service-main\\src\\main\\resources\\secrets.yml'
-                        }
-                    }
-                }
-
-                stage('Inject Secrets for Release Branch') {
-                    steps {
-                        withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            echo 'Injecting secrets.yml for release/2024_M10 branch'
-                            bat 'copy %SECRET_FILE% profile-service-release\\src\\main\\resources\\secrets.yml'
+                            echo 'Injecting secrets.yml'
+                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                         }
                     }
                 }
@@ -47,62 +40,42 @@ pipeline {
         }
 
         stage('Build') {
-            parallel {
-                stage('Build Main Branch') {
-                    steps {
-                        echo 'Building main branch...'
-                        dir('profile-service-main') {
-                            bat 'mvn clean package'
-                        }
-                    }
-                }
-
-                stage('Build Release Branch') {
-                    steps {
-                        echo 'Building release/2024_M10 branch...'
-                        dir('profile-service-release') {
-                            bat 'mvn clean package'
-                        }
+            steps {
+                script {
+                    if (params.BRANCH_NAME == 'main') {
+                        echo 'Building the main branch...'
+                        bat 'mvn clean package'
+                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Building the release/2024_M10 branch...'
+                        bat 'mvn clean package'
                     }
                 }
             }
         }
 
         stage('Test') {
-            parallel {
-                stage('Test Main Branch') {
-                    steps {
-                        echo 'Testing main branch...'
-                        dir('profile-service-main') {
-                            bat 'mvn test'
-                        }
-                    }
-                }
-
-                stage('Test Release Branch') {
-                    steps {
-                        echo 'Testing release/2024_M10 branch...'
-                        dir('profile-service-release') {
-                            bat 'mvn test'
-                        }
+            steps {
+                script {
+                    if (params.BRANCH_NAME == 'main') {
+                        echo 'Running tests for the main branch...'
+                        bat 'mvn test'
+                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Running tests for the release/2024_M10 branch...'
+                        bat 'mvn test'
                     }
                 }
             }
         }
 
         stage('Deploy') {
-            parallel {
-                stage('Deploy Main Branch') {
-                    steps {
-                        echo 'Deploying main branch...'
-                        // Add your deployment logic here for main branch
-                    }
-                }
-
-                stage('Deploy Release Branch') {
-                    steps {
-                        echo 'Deploying release/2024_M10 branch...'
-                        // Add your deployment logic here for release/2024_M10 branch
+            steps {
+                script {
+                    if (params.BRANCH_NAME == 'main') {
+                        echo 'Deploying the main branch...'
+                        // Add deployment steps for the main branch
+                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Deploying the release/2024_M10 branch...'
+                        // Add deployment steps for the release branch
                     }
                 }
             }
