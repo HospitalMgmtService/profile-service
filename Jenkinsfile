@@ -58,5 +58,6 @@ pipeline {
                 bat 'dir'
                 // bat 'mvn clean deploy'
             }
+        }
     }
 }
