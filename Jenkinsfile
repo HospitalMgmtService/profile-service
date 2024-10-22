@@ -57,6 +57,7 @@ pipeline {
             steps {
                 echo "Building the project for branch: ${params.BRANCH_NAME}..."
                 dir('profile-service') {
+                    bat 'dir'
                     bat 'mvn clean package'
                 }
             }
@@ -66,6 +67,7 @@ pipeline {
             steps {
                 echo "Running tests for branch: ${params.BRANCH_NAME}..."
                 dir('profile-service') {
+                    bat 'dir'
                     bat 'mvn test'
                 }
             }
