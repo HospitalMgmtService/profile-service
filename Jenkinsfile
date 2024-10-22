@@ -12,44 +12,38 @@ pipeline {
     stages {
         stage('Checkout Git Repo') {
             steps {
-                script {
-                    echo "Checking out the ${params.BRANCH_NAME} branch..."
-                    // Clean workspace before checkout
-                    cleanWs()
-                    
-                    // Using Git credentials for authentication
-                    checkout([$class: 'GitSCM',
-                        branches: [[name: "*/${params.BRANCH_NAME}"]],  // Added * for proper branch reference
-                        userRemoteConfigs: [[
-                            url: 'https://github.com/HospitalMgmtService/profile-service',
-                            credentialsId: 'YOUR_GIT_CREDENTIALS_ID'  // Add your Git credentials ID here
-                        ]],
-                        extensions: [
-                            [$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service'],
-                            [$class: 'CleanBeforeCheckout']  // Clean before checkout
-                        ]
-                    ])
+                echo "Checking out the ${params.BRANCH_NAME} branch..."
+
+				// Clean workspace before checkout
+                cleanWs()
+
+				script {
+                    // Verify if the branch exists
+                    def branches = bat(script: 'git ls-remote --heads https://github.com/HospitalMgmtService/profile-service', returnStdout: true).trim()
+                    if (!branches.contains(params.BRANCH_NAME)) {
+                        error "Branch '${params.BRANCH_NAME}' does not exist in the repository."
+                    }
                 }
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
 
         stage('Inject Secrets') {
             steps {
                 script {
-                    dir('profile-service') {  // Change to profile-service directory
-                        // Create resources directory if it doesn't exist
-                        bat 'mkdir src\\main\\resources 2>nul || exit 0'
-                        
-                        if (params.BRANCH_NAME == 'release/2024_M10') {
-                            echo 'Injecting secrets.yml for release/2024_M10...'
-                            withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS_RELEASE', variable: 'SECRET_FILE')]) {
-                                bat 'copy "%SECRET_FILE%" src\\main\\resources\\secrets.yml'
-                            }
-                        } else {
-                            echo 'Injecting secrets.yml for main...'
-                            withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                                bat 'copy "%SECRET_FILE%" src\\main\\resources\\secrets.yml'
-                            }
+                    // Define the destination path for secrets.yml
+                    def secretsFilePath = 'profile-service\\src\\main\\resources\\secrets.yml'
+                    
+                    // Check if the branch is release/2024_M10 and adjust the source path accordingly
+                    if (params.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Injecting secrets.yml for release/2024_M10...'
+                        withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                            bat "copy %SECRET_FILE% ${secretsFilePath}"
+                        }
+                    } else {
+                        echo 'Injecting secrets.yml for main...'
+                        withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                            bat "copy %SECRET_FILE% ${secretsFilePath}"
                         }
                     }
                 }
@@ -60,7 +54,7 @@ pipeline {
             steps {
                 echo "Building the project for branch: ${params.BRANCH_NAME}..."
                 dir('profile-service') {
-                    bat 'mvn clean package -DskipTests'
+                    bat 'mvn clean package'
                 }
             }
         }
@@ -79,12 +73,6 @@ pipeline {
                 echo "Deploying the project for branch: ${params.BRANCH_NAME}..."
                 // Add deployment logic here if necessary
             }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()  // Clean workspace after build
         }
     }
 }
