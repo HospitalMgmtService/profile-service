@@ -13,6 +13,13 @@ pipeline {
         stage('Checkout Git Repo') {
             steps {
                 echo "Checking out the ${params.BRANCH_NAME} branch..."
+                script {
+                    // Verify if the branch exists
+                    def branches = bat(script: 'git ls-remote --heads https://github.com/HospitalMgmtService/profile-service', returnStdout: true).trim()
+                    if (!branches.contains(params.BRANCH_NAME)) {
+                        error "Branch '${params.BRANCH_NAME}' does not exist in the repository."
+                    }
+                }
                 checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
@@ -26,11 +33,13 @@ pipeline {
                     // Check if the branch is release/2024_M10 and adjust the source path accordingly
                     if (params.BRANCH_NAME == 'release/2024_M10') {
                         echo 'Injecting secrets.yml for release/2024_M10...'
-                        bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                        withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                            bat "copy %SECRET_FILE% ${secretsFilePath}"
+                        }
                     } else {
                         echo 'Injecting secrets.yml for main...'
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                            bat "copy %SECRET_FILE% ${secretsFilePath}"
                         }
                     }
                 }
