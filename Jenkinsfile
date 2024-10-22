@@ -30,7 +30,7 @@ pipeline {
                     } else {
                         echo 'Injecting secrets.yml for main...'
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            bat "copy %SECRET_FILE% ${secretsFilePath}"
+                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                         }
                     }
                 }
