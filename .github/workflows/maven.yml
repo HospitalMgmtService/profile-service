@@ -2,9 +2,13 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]  # This will trigger for all branches
+    paths:
+      - release/**  # This will restrict the trigger to changes in the release directory
   pull_request:
-    branches: [ "main" ]
+    branches: [ "**" ]  # This will trigger for all branches in pull requests
+    paths:
+      - release/**  # This will restrict the trigger to pull requests that affect the release directory
 
 jobs:
   build:
