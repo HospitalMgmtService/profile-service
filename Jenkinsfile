@@ -6,7 +6,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build (e.g., main or release/2024_M10)')
+        string(name: 'BRANCH_NAME', defaultValue: 'release/2024_M10', description: 'Branch to build (e.g., main or release/2024_M10)')
     }
 
     stages {
