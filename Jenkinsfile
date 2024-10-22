@@ -27,6 +27,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Stage of Build: Building the project...'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                }            
                 bat 'dir'
                 bat 'mvn clean package'
             }
@@ -35,6 +39,10 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Stage of Test: Running tests...'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                }            
                 bat 'dir'
                 bat 'mvn test'
             }
@@ -43,8 +51,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Stage of Deploy: Deploying the application...'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                }            
                 bat 'dir'
+                // bat 'mvn clean deploy'
             }
-        }
     }
 }
