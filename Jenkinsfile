@@ -33,8 +33,8 @@ pipeline {
 
         stage('UAT') {
             steps {
-                echo 'Stage of UAT: Injecting UAT Secrets and Building...'
-                withCredentials([file(credentialsId: 'UAT_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                echo 'Stage of UAT: Injecting UAT Secrets and Building... replace by UAT_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                     bat 'mvn clean package -Puat'
                 }
@@ -43,8 +43,8 @@ pipeline {
 
         stage('Dev') {
             steps {
-                echo 'Stage of Dev: Injecting Dev Secrets and Building...'
-                withCredentials([file(credentialsId: 'DEV_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                echo 'Stage of Dev: Injecting Dev Secrets and Building... replace by DEV_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                     bat 'mvn clean package -Pdev'
                 }
@@ -53,8 +53,8 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Stage of Test: Injecting Test Secrets and Building...'
-                withCredentials([file(credentialsId: 'TEST_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                echo 'Stage of Test: Injecting Test Secrets and Building... replace by TEST_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                     bat 'mvn clean package -Ptest'
                 }
@@ -63,8 +63,8 @@ pipeline {
 
         stage('Production') {
             steps {
-                echo 'Stage of Production: Injecting Production Secrets and Deploying...'
-                withCredentials([file(credentialsId: 'PROD_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                echo 'Stage of Production: Injecting Production Secrets and Deploying... replace by PROD_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                     bat 'mvn clean package -Pprod'
                 }
