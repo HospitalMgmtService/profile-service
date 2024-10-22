@@ -46,7 +46,7 @@ pipeline {
                 bat 'dir'
                 bat 'mvn test'
             }
-        }        
+        }
 
         stage('BUILD') {
             steps {
@@ -70,7 +70,7 @@ pipeline {
                 bat 'dir'
                 bat 'mvn clean package'
             }
-        }           
+        }
 
         stage('DEPLOY') {
             steps {
