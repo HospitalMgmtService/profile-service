@@ -6,78 +6,51 @@ pipeline {
     }
 
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build (e.g., main or release/2024_M10)')
+        string(name: 'BRANCH_NAME', defaultValue: 'release/2024_M10', description: 'Branch to build (e.g., release/2024_M10)')
     }
 
     stages {
         stage('Checkout Git Repo') {
             steps {
-                script {
-                    if (params.BRANCH_NAME == 'main') {
-                        echo 'Checking out the main branch...'
-                        checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
-                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Checking out the release/2024_M10 branch...'
-                        checkout([$class: 'GitSCM', branches: [[name: 'release/2024_M10']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
-                    } else {
-                        error("Unsupported branch: ${params.BRANCH_NAME}")
-                    }
-                }
+                echo "Stage of Checkout Git Repo: Checking out branch ${params.BRANCH_NAME}"
+                // Dynamically checking out the specified branch
+                checkout([$class: 'GitSCM', branches: [[name: "${params.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
             }
         }
-
+        
         stage('Inject Secrets') {
             steps {
-                script {
-                    if (params.BRANCH_NAME == 'main' || params.BRANCH_NAME == 'release/2024_M10') {
-                        withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            echo 'Injecting secrets.yml'
-                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                        }
-                    }
+                // Copy secrets.yml from Jenkins credentials to the working directory
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\release/2024_M10\\resources\\secrets.yml'
                 }
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    if (params.BRANCH_NAME == 'main') {
-                        echo 'Building the main branch...'
-                        bat 'mvn clean package'
-                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Building the release/2024_M10 branch...'
-                        bat 'mvn clean package'
-                    }
-                }
+                // Add your build steps here (e.g., for Maven/Gradle)
+                echo 'Stage of Build: Building the project...'
+                bat 'dir'
+                // build the project and create a JAR file
+                bat 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                script {
-                    if (params.BRANCH_NAME == 'main') {
-                        echo 'Running tests for the main branch...'
-                        bat 'mvn test'
-                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Running tests for the release/2024_M10 branch...'
-                        bat 'mvn test'
-                    }
-                }
+                // Add your test steps here
+                echo 'Stage of Test: Running tests...'
+                bat 'dir'
+                bat 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                script {
-                    if (params.BRANCH_NAME == 'main') {
-                        echo 'Deploying the main branch...'
-                        // Add deployment steps for the main branch
-                    } else if (params.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Deploying the release/2024_M10 branch...'
-                        // Add deployment steps for the release branch
-                    }
-                }
+                // Add your deployment steps here
+                echo 'Stage of Deploy: Deploying the application...'
             }
         }
     }
