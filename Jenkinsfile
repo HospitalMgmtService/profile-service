@@ -42,7 +42,6 @@ pipeline {
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                             echo 'Stage of Inject Secrets - release/2024_M10 branch'
-                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                         }
                     } else {
                         echo 'Branch not recognized for secrets injection.'
@@ -58,11 +57,9 @@ pipeline {
                     bat 'dir' // List files for debugging
 
                     if (env.BRANCH_NAME == 'main') {
-                        echo 'Building main version...'
-                        bat 'mvn clean package' // Run build for main branch
+                        echo 'Stage of Build: main branch...'
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Building release/2024_M10 version...'
-                        bat 'mvn clean package -DskipTests' // Skip tests for release build
+                        echo 'Stage of Build: release/2024_M10 branch...'
                     } else {
                         echo 'Branch not recognized for building.'
                     }
@@ -77,10 +74,9 @@ pipeline {
                     bat 'dir' // List files for debugging
 
                     if (env.BRANCH_NAME == 'main') {
-                        echo 'Running tests for main branch...'
-                        bat 'mvn test' // Run tests for main branch
+                        echo 'Stage of Test: main branch...'
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Skipping tests for release/2024_M10 branch...'
+                        echo 'Stage of Build: release/2024_M10 branch...'
                     } else {
                         echo 'Branch not recognized for testing.'
                     }
@@ -92,11 +88,9 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'main') {
-                        echo 'Deploying to production environment for main branch...'
-                        // Add your deployment logic for main branch here
+                        echo 'Stage of Deploy: main branch...'
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Deploying the application for release/2024_M10 branch...'
-                        // Add your deployment logic for release/2024_M10 branch here
+                        echo 'Stage of Deploy: release/2024_M10 branch...'
                     } else {
                         echo 'Branch not recognized for deployment.'
                     }
