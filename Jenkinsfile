@@ -30,6 +30,7 @@ pipeline {
                     userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']],
                     extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]
                 ])
+                bat 'dir'
             }
         }
 
@@ -49,6 +50,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                         bat "copy %SECRET_FILE% ${secretsFilePath}"
                     }
+                    bat 'dir'
                 }
             }
         }
@@ -76,6 +78,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Deploying the project for branch: ${params.BRANCH_NAME}..."
+                bat 'dir'
                 // Add deployment logic here if necessary
             }
         }
