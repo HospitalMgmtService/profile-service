@@ -9,6 +9,10 @@ pipeline {
         stage('Checkout Git Repo') {
             steps {
                 echo 'Stage of Checkout Git Repo'
+
+                // Clean workspace before checkout
+                cleanWs()
+
                 checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]])
                 bat 'dir'
             }
@@ -31,22 +35,12 @@ pipeline {
             }
         }
 
-        stage('UAT') {
-            steps {
-                echo 'Stage of UAT: Injecting UAT Secrets and Building... replace by UAT_SERVICE_SECRETS'
-                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                    bat 'mvn clean package -Puat'
-                }
-            }
-        }
-
         stage('Dev') {
             steps {
                 echo 'Stage of Dev: Injecting Dev Secrets and Building... replace by DEV_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                    bat 'mvn clean package -Pdev'
+                    bat 'mvn clean package -P dev'
                 }
             }
         }
@@ -56,7 +50,17 @@ pipeline {
                 echo 'Stage of Test: Injecting Test Secrets and Building... replace by TEST_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                    bat 'mvn clean package -Ptest'
+                    bat 'mvn clean package -P test'
+                }
+            }
+        }
+
+        stage('UAT') {
+            steps {
+                echo 'Stage of UAT: Injecting UAT Secrets and Building... replace by UAT_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                    bat 'mvn clean package -P uat'
                 }
             }
         }
@@ -66,7 +70,7 @@ pipeline {
                 echo 'Stage of Production: Injecting Production Secrets and Deploying... replace by PROD_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                    bat 'mvn clean package -Pprod'
+                    bat 'mvn clean package -P prod'
                 }
             }
         }
