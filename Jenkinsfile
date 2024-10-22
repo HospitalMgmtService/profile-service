@@ -9,9 +9,9 @@ pipeline {
         stage('Checkout Git Repo') {
             steps {
                 echo 'Stage of Checkout Git Repo'
-                // Explicitly checking out the Jenkinsfile from a specific branch
+                // Check out the current branch
                 checkout([$class: 'GitSCM', 
-                          branches: [[name: "*/${env.BRANCH_NAME}"]], // Check out the current branch
+                          branches: [[name: "*/${env.BRANCH_NAME}"]], 
                           userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], 
                           extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]
                 ])
@@ -21,14 +21,13 @@ pipeline {
         stage('Inject Secrets') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'release/2024_M10') {
-                        // Copy secrets.yml for specific branch
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Stage of Inject Secrets - branch of main'
+                    } else if (env.BRANCH_NAME == 'release/2024_M10') {
+                        // Copy secrets.yml for the release branch
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            echo 'Injecting secrets.yml for release/2024_M10'
-                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                            echo 'Stage of Inject Secrets - branch of release/2024_M10'
                         }
-                    } else if (env.BRANCH_NAME == 'dev') {
-                        echo 'No secrets to inject for dev branch.'
                     } else {
                         echo 'Branch not recognized for secrets injection.'
                     }
@@ -42,15 +41,12 @@ pipeline {
                     echo 'Stage of Build: Building the project...'
                     bat 'dir' // List files for debugging
 
-                    if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Building release version...'
-                        bat 'mvn clean package -DskipTests' // Skip tests for release builds
-                    } else if (env.BRANCH_NAME == 'dev') {
-                        echo 'Building development version...'
-                        bat 'mvn clean package' // Run all tests for dev builds
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Building main version...'
+                    } else if (env.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Building release/2024_M10 version...'
                     } else {
-                        echo 'Building other version...'
-                        bat 'mvn clean package -PsomeProfile' // Example for other branches
+                        echo 'Branch not recognized for building.'
                     }
                 }
             }
@@ -61,11 +57,12 @@ pipeline {
                 script {
                     echo 'Stage of Test: Running tests...'
                     bat 'dir' // List files for debugging
-
-                    if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Skipping tests for release branch...'
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Testing main version...'
+                    } else if (env.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Testing release/2024_M10 branch...'
                     } else {
-                        bat 'mvn test' // Run tests for other branches
+                        echo 'Testing other branch'
                     }
                 }
             }
@@ -74,15 +71,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Deploying the application for release branch...'
-                        // Add your deployment logic for release branch here
-                    } else if (env.BRANCH_NAME == 'dev') {
-                        echo 'Deploying to development environment...'
-                        // Add your deployment logic for dev branch here
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Deploying to production environment for main branch...'
+                        // Add your deployment logic for main branch here
+                    } else if (env.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Deploying the application for release/2024_M10 branch...'
+                        // Add your deployment logic for release/2024_M10 branch here
                     } else {
-                        echo 'Deploying to staging environment for other branches...'
-                        // Add your deployment logic for other branches here
+                        echo 'Branch not recognized for deployment.'
                     }
                 }
             }
