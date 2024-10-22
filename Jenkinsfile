@@ -38,7 +38,7 @@ pipeline {
 
         stage('TEST') {
             steps {
-                echo 'Stage of Test: Running tests...'
+                echo 'Stage of TEST...replace PROFILE_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
@@ -50,7 +50,7 @@ pipeline {
 
         stage('BUILD') {
             steps {
-                echo 'Stage of Build: Building the project...'
+                echo 'Stage of BUILD...replace PROFILE_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
@@ -74,7 +74,7 @@ pipeline {
 
         stage('DEPLOY') {
             steps {
-                echo 'Stage of Deploy: Deploying the application...'
+                echo 'Stage of Deploy...replace PROFILE_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
