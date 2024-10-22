@@ -23,38 +23,62 @@ pipeline {
                 }
             }
         }
-
-        stage('Build') {
+        
+        stage('DEV') {
             steps {
-                echo 'Stage of Build: Building the project...'
+                echo 'Stage of DEV...replace PROFILE_SERVICE_SECRETS'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                }            
+                }
                 bat 'dir'
-                bat 'mvn clean package'
+                bat 'mvn clean compile'
             }
         }
-
-        stage('Test') {
+        
+        stage('TEST') {
             steps {
                 echo 'Stage of Test: Running tests...'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                }            
+                }
                 bat 'dir'
                 bat 'mvn test'
             }
-        }
+        }        
 
-        stage('Deploy') {
+        stage('BUILD') {
+            steps {
+                echo 'Stage of Build: Building the project...'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                }
+                bat 'dir'
+                bat 'mvn clean package'
+            }
+        }
+        
+        stage('UAT') {
+            steps {
+                echo 'Stage of UAT...replace PROFILE_SERVICE_SECRETS'
+                withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
+                    echo 'Injecting secrets.yml'
+                    bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
+                }
+                bat 'dir'
+                bat 'mvn clean package'
+            }
+        }           
+
+        stage('DEPLOY') {
             steps {
                 echo 'Stage of Deploy: Deploying the application...'
                 withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
                     echo 'Injecting secrets.yml'
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
-                }            
+                }
                 bat 'dir'
                 // bat 'mvn clean deploy'
             }
