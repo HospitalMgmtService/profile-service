@@ -8,25 +8,41 @@ pipeline {
     stages {
         stage('Checkout Git Repo') {
             steps {
-                echo 'Stage of Checkout Git Repo'
-                // Check out the current branch
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: "*/${env.BRANCH_NAME}"]], 
-                          userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], 
-                          extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]
-                ])
+                script {
+                    echo 'Stage of Checkout Git Repo'
+
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Checking out main branch...'
+                        // Checkout the main branch
+                        checkout([$class: 'GitSCM', 
+                                  branches: [[name: '*/main']], 
+                                  userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], 
+                                  extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]
+                        ])
+                    } else if (env.BRANCH_NAME == 'release/2024_M10') {
+                        echo 'Checking out release/2024_M10 branch...'
+                        // Checkout the release/2024_M10 branch
+                        checkout([$class: 'GitSCM', 
+                                  branches: [[name: '*/release/2024_M10']], 
+                                  userRemoteConfigs: [[url: 'https://github.com/HospitalMgmtService/profile-service']], 
+                                  extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'profile-service']]
+                        ])
+                    } else {
+                        echo 'Branch not recognized for checkout.'
+                    }
+                }
             }
         }
-        
+
         stage('Inject Secrets') {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'main') {
-                        echo 'Stage of Inject Secrets - branch of main'
+                        echo 'Stage of Inject Secrets - main branch (No secrets required)'
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
-                        // Copy secrets.yml for the release branch
                         withCredentials([file(credentialsId: 'PROFILE_SERVICE_SECRETS', variable: 'SECRET_FILE')]) {
-                            echo 'Stage of Inject Secrets - branch of release/2024_M10'
+                            echo 'Stage of Inject Secrets - release/2024_M10 branch'
+                            bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                         }
                     } else {
                         echo 'Branch not recognized for secrets injection.'
@@ -43,8 +59,10 @@ pipeline {
 
                     if (env.BRANCH_NAME == 'main') {
                         echo 'Building main version...'
+                        bat 'mvn clean package' // Run build for main branch
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
                         echo 'Building release/2024_M10 version...'
+                        bat 'mvn clean package -DskipTests' // Skip tests for release build
                     } else {
                         echo 'Branch not recognized for building.'
                     }
@@ -57,12 +75,14 @@ pipeline {
                 script {
                     echo 'Stage of Test: Running tests...'
                     bat 'dir' // List files for debugging
+
                     if (env.BRANCH_NAME == 'main') {
-                        echo 'Testing main version...'
+                        echo 'Running tests for main branch...'
+                        bat 'mvn test' // Run tests for main branch
                     } else if (env.BRANCH_NAME == 'release/2024_M10') {
-                        echo 'Testing release/2024_M10 branch...'
+                        echo 'Skipping tests for release/2024_M10 branch...'
                     } else {
-                        echo 'Testing other branch'
+                        echo 'Branch not recognized for testing.'
                     }
                 }
             }
