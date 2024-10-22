@@ -44,7 +44,7 @@ pipeline {
                     bat 'copy %SECRET_FILE% src\\main\\resources\\secrets.yml'
                 }
                 bat 'dir'
-                bat 'mvn test'
+                bat 'mvn test jacoco:report'
             }
         }
 
